@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 03:52:57 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/20 05:04:09 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/20 09:09:52 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,11 @@ typedef struct	s_path
 	struct stat stats;
 	char		*filename;
 }				t_path;
+
+void 	ft_lstsort(t_list *start, char order,
+			int (*f)(t_path *, t_path *, char));
+int		name_cmp(t_path *path, t_path *next, char order);
+int		time_cmp(t_path *path, t_path *next, char order);
+void 	process_args(int ac, char **av, t_args *args);
 
 #endif

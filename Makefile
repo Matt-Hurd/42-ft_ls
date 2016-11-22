@@ -6,13 +6,15 @@
 #    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/11/20 07:17:48 by mhurd            ###   ########.fr        #
+#    Updated: 2016/11/20 09:11:14 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= ft_ls
 
-SRC		= main.c
+SRC		=	main.c \
+			sort.c \
+			handle_args.c
 
 ifdef ALLOCWRAP
 	LDFLAGS += $(HOME)/lib/alloc_wrap.c -ldl
