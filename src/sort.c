@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 09:07:30 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/20 11:20:16 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/02 19:10:47 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,24 @@ void swap(t_list *a, t_list *b)
     b->content = temp;
 }
 
+int		dir_cmp(t_path *path, t_path *next, char order)
+{
+	int 		res;
+	int			res2;
+	struct stat	stats;
+
+	res = S_ISDIR(path->stats.st_mode);
+	res2 = S_ISDIR(next->stats.st_mode);
+
+	if (stat(path->filename, &stats) != -1 && S_ISDIR(stats.st_mode))
+		res = 1;
+	if (stat(next->filename, &stats) != -1 && S_ISDIR(stats.st_mode))
+		res2 = 1;
+	if (!res)
+		return (order);
+	else
+		return ((res2 == res) == order);
+}
 int		name_cmp(t_path *path, t_path *next, char order)
 {
 	int res;
@@ -52,7 +70,6 @@ int		time_cmp(t_path *path, t_path *next, char order)
 void ft_lstsort(t_list *start, char order, int (*f)(t_path *, t_path *, char))
 {
     int swapped;
-	int i;
     t_list *ptr1;
     t_list *lptr;
 
