@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:50:09 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/03 16:50:11 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/03 17:05:23 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	set_arg(t_args *args, char c)
 	else if (c == 'f')
 		args->f = 1;
 	else if (c == '1')
-		;
+		args->l = 0;
+	else if (c == 'T')
+		args->lt = 1;
 	else
 	{
 		ft_dprintf(2, "ls: illegal option -- %c\n", c);

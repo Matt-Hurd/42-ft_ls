@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 03:52:57 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/03 16:51:36 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/03 17:04:59 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_args
 	unsigned int	r : 1;
 	unsigned int	a : 1;
 	unsigned int	t : 1;
+	unsigned int	lt : 1;
 	unsigned int	f : 1;
 	t_list			*dirs;
 	t_list			*dirs_pre;

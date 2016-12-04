@@ -6,13 +6,13 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 20:01:02 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/03 16:52:04 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/03 17:09:51 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*time_string(time_t t)
+char	*time_string(time_t t, t_args args)
 {
 	char *str;
 	char *end;
@@ -26,6 +26,8 @@ char	*time_string(time_t t)
 	else
 		ft_asprintf(&end, "%s:%s", buff2[0], buff2[1]);
 	ft_asprintf(&str, "%s %2s %*s", buff[1], buff[2], 5, end);
+	if (args.lt)
+		ft_asprintf(&str, "%s %2s %s %s", buff[1], buff[2], buff[3], buff[4]);
 	free(buff);
 	free(buff2);
 	return (str);
@@ -46,7 +48,7 @@ void	print_file(t_args args, t_path *file, int widths[5])
 		ft_printf(" %*d %-*s %-*s ", widths[0], stats.st_nlink,
 			widths[1], pwd->pw_name, widths[2], grp->gr_name);
 		ft_printf(" %*lld %s ", widths[3], stats.st_size,
-			time_string(stats.st_mtime));
+			time_string(stats.st_mtime, args));
 	}
 	if (S_ISLNK(stats.st_mode) && args.l)
 		print_link(file, args);
