@@ -6,12 +6,12 @@
 #    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/25 19:00:08 by mhurd             #+#    #+#              #
-#    Updated: 2016/12/01 23:58:28 by mhurd            ###   ########.fr        #
+#    Updated: 2016/12/03 16:33:09 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	libftprintf.a
-FLAGS =	-Wall -Wextra -Werror
+FLAGS =	-Wall -Wextra -Werror -O3 -march=native -funroll-loops
 CC = 	gcc
 ODIR =	bin/
 IDIR =	includes/

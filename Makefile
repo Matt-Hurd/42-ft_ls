@@ -6,7 +6,7 @@
 #    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/12/02 00:12:24 by mhurd            ###   ########.fr        #
+#    Updated: 2016/12/03 16:32:49 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ NAME	= ft_ls
 
 SRC		=	main.c \
 			sort.c \
-			handle_args.c
+			handle_args.c \
+			helpers.c \
+			printer.c \
+			ls.c
 
 ifdef ALLOCWRAP
 	LDFLAGS += $(HOME)/lib/alloc_wrap.c -ldl
@@ -22,8 +25,7 @@ endif
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
 CC		= gcc
-# CFLAGS	= -Wall -Wextra -Werror -O3
-CFLAGS = -Wall -Wextra
+CFLAGS	= -Wall -Wextra -Werror -O3 -march=native -funroll-loops
 
 LIBFT	= ./libft/libft.a
 LIBINC	= -I./libft

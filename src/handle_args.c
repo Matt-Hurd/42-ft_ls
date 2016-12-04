@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/20 09:09:28 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/02 19:10:32 by mhurd            ###   ########.fr       */
+/*   Created: 2016/12/03 16:50:09 by mhurd             #+#    #+#             */
+/*   Updated: 2016/12/03 16:50:11 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_arg(t_args *args, char c)
 	if (c == 'l')
 		args->l = 1;
 	else if (c == 'R')
-		args->R = 1;
+		args->lr = 1;
 	else if (c == 'r')
 		args->r = 1;
 	else if (c == 'a')
@@ -36,34 +36,35 @@ void	set_arg(t_args *args, char c)
 	}
 }
 
-void 	process_args(int ac, char **av, t_args *args)
+void	handle_dash(char **av, int count, int *end, t_args *args)
 {
-	int 	count;
-	int 	iter;
-	int 	x;
+	int iter;
+
+	iter = 1;
+	while (av[count][iter])
+	{
+		if (av[count][iter] == '-' && !av[count][iter + 1] && iter == 1)
+		{
+			*end = 1;
+			break ;
+		}
+		set_arg(args, av[count][iter++]);
+	}
+}
+
+void	process_args(int ac, char **av, t_args *args)
+{
+	int		count;
 	t_path	tmp;
 	int		end;
 
 	count = 0;
-	x = 0;
 	args->count = 0;
 	end = 0;
 	while (++count < ac)
 	{
 		if (av[count][0] == '-' && !end && av[count][1])
-		{
-			iter = 1;
-			while (av[count][iter])
-			{
-				if (av[count][iter] == '-' && !av[count][iter + 1] && iter == 1)
-				{
-					end = 1;
-					break ;
-				}
-				set_arg(args, av[count][iter]);
-				iter++;
-			}
-		}
+			handle_dash(av, count, &end, args);
 		else
 		{
 			if (av[count][0] == 0)
@@ -71,11 +72,9 @@ void 	process_args(int ac, char **av, t_args *args)
 				ft_dprintf(2, "ls: fts_open: No such file or directory\n");
 				exit(1);
 			}
-			if (ft_strequ(av[count], "-"))
-				end = 1;
+			end = (ft_strequ(av[count], "-")) ? 1 : end;
 			tmp.filename = ft_strdup(av[count]);
-			if (tmp.filename)
-				ft_lst_add_back(&args->dirs_pre, ft_lstnew(&tmp, sizeof(t_path)));
+			ft_lst_add_back(&args->dirs_pre, ft_lstnew(&tmp, sizeof(t_path)));
 			args->count++;
 		}
 	}
